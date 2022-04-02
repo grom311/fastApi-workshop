@@ -1,5 +1,6 @@
+"""service by auth api"""
+
 from datetime import datetime, timedelta
-from xml.dom import ValidationErr
 from passlib.hash import bcrypt
 from jose import jwt, JWTError
 from pydantic import ValidationError
@@ -15,20 +16,25 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/auth/sign-in/')
 
 
 def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
+    """authentificate user in system"""
     return AuthService.verify_token(token)
 
 
 class AuthService:
+    """AuthService by check and validate Token"""
     @classmethod
     def verify_password(cls, plain_password: str, hashed_password: str) -> bool:
+        """check verificate password"""
         return bcrypt.verify(plain_password, hashed_password)
 
     @classmethod
     def hash_password(cls, password: str) -> str:
+        """hasing password by bcrypto"""
         return bcrypt.hash(password)
 
     @classmethod
     def verify_token(cls, token: str) -> User:
+        """check user by token"""
         exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail='Could not validate credentials',
@@ -54,6 +60,7 @@ class AuthService:
 
     @classmethod
     def create_token(cls, user: tables.User) -> Token:
+        """create Token by new user"""
         user_data = User.from_orm(user)
         now = datetime.utcnow()
         payload = {
@@ -77,6 +84,7 @@ class AuthService:
         self,
         user_data: UserCreate,
     ) -> Token:
+        """registration new user"""
         user = tables.User(
             email=user_data.email,
             username=user_data.username,
@@ -91,6 +99,7 @@ class AuthService:
         username: str,
         password: str,
     ) -> Token:
+        """authenticate_user by user password"""
         exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail='Incorrect username or password',

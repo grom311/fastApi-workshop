@@ -6,3 +6,6 @@ sqlalchemy==1.4.32
 python-jose==3.3.0
 passlib[bcrypt]==3.2.0
 python-multipart==0.0.5
+
+# dev
+pylint==2.13.4

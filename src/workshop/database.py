@@ -1,3 +1,5 @@
+"""module for connect database and create session"""
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from settings import settings
@@ -14,6 +16,7 @@ Session = sessionmaker(
 )
 
 def get_session() -> Session:
+    """get Session iterator"""
     session = Session()
     try:
         yield session

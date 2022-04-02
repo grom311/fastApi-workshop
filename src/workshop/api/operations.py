@@ -1,7 +1,6 @@
 from typing import List, Optional
-from fastapi import APIRouter, Response, status
+from fastapi import APIRouter, Response, Depends, status
 from models.operations import OperationUpdate, Operation, OperationKind, OperationCreate
-from fastapi import Depends
 
 from services.operations import OperationsService
 from services.auth import get_current_user
@@ -17,7 +16,7 @@ def get_operations(
     user: User = Depends(get_current_user),
     ):
     return service.get_list(user_id=user.id, kind=kind)
-    
+
 @router.post('/', response_model=Operation)
 def create_operation(
     operation_data: OperationCreate,

@@ -1,3 +1,5 @@
+"""module tables"""
+
 import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -6,6 +8,7 @@ Base = declarative_base()
 
 
 class User(Base):
+    """User table information"""
     __tablename__ = 'users'
     id = sa.Column(sa.Integer, primary_key=True)
     email = sa.Column(sa.Text, unique=True)
@@ -14,6 +17,7 @@ class User(Base):
 
 
 class Operation(Base):
+    """table with operation for users"""
     __tablename__ = 'operations'
     id = sa.Column(sa.Integer, primary_key=True)
     user_id = sa.Column(sa.Integer, sa.ForeignKey('users.id'))

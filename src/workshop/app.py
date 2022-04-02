@@ -1,10 +1,7 @@
-from datetime import datetime
+"""main module, run fastapi uvicorn"""
 from fastapi import FastAPI
-# import uvicorn
-# from settings import settings
 from api import router
 
-import time
 
 app = FastAPI()
 app.include_router(router)
