@@ -1,23 +1,23 @@
 from fastapi import APIRouter, Depends
-from models.auth import (
-    User, 
-    UserCreate, 
-    Token,
-)
 from fastapi.security import OAuth2PasswordRequestForm
 
-from services.auth import AuthService, get_current_user
+from ..models.auth import (
+    User,
+    UserCreate,
+    Token,
+)
+from ..services.auth import AuthService, get_current_user
 
 router = APIRouter(
     prefix='/auth',
+    tags=['auth'],
 )
 
 @router.post('/sign-up/', response_model=Token)
 def sign_up(
-    user_data: UserCreate, 
+    user_data: UserCreate,
     service: AuthService = Depends()):
     return service.register_new_user(user_data)
-
 
 @router.post('/sign-in/', response_model=Token)
 def sign_in(

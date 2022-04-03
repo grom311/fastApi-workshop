@@ -1,13 +1,13 @@
 from typing import List, Optional
 from fastapi import APIRouter, Response, Depends, status
-from models.operations import OperationUpdate, Operation, OperationKind, OperationCreate
-
-from services.operations import OperationsService
-from services.auth import get_current_user
-from tables import User
+from ..models.operations import OperationUpdate, Operation, OperationKind, OperationCreate
+from ..services.operations import OperationsService
+from ..services.auth import get_current_user
+from ..tables import User
 
 router = APIRouter(
     prefix='/operations',
+    tags=['operations'],
 )
 
 @router.get('/', response_model=List[Operation])

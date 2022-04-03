@@ -3,7 +3,7 @@ from typing import Any
 from fastapi import Depends
 from .operations import OperationsService
 import csv
-from models.operations import OperationCreate, Operation
+from ..models.operations import OperationCreate, Operation
 
 
 class ReportService:

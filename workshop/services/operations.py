@@ -1,9 +1,9 @@
 from typing import List, Optional
 from fastapi import Depends, status, HTTPException
 from sqlalchemy.orm import Session
-from database import get_session
-import tables
-from models.operations import OperationUpdate, OperationKind, OperationCreate
+from ..database import get_session
+from .. import tables
+from ..models.operations import OperationUpdate, OperationKind, OperationCreate
 
 
 class OperationsService:

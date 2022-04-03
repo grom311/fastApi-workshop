@@ -4,7 +4,8 @@ class Settings(BaseSettings):
     server_hort: str = '127.0.0.1'
     server_port: int = 8000
     database_url = "sqlite:///./database.sqlite3"
-    jwt_secret : str
+    # this is not work from .env
+    jwt_secret : str = '123456'
     jwt_algoritm: str = 'HS256'
     jwt_expire: int = 3600
 
