@@ -1,4 +1,5 @@
 
+import json
 from ..app import app
 from ..api.auth import router as auth_router
 from ..api.operations import router as operation_router
@@ -32,3 +33,17 @@ def test_read_item_bad_token(test_app):
     
     assert response.status_code == 401
     assert response.json() == {"detail": "Not authenticated"}
+
+
+def test_read_note(test_app, monkeypatch):
+    test_data = {"username": 'grom1', "password": "12345", }
+
+    # async def mock_get(id):
+    #     return test_data
+
+    # monkeypatch.setattr(app, "post", mock_get)
+
+    response = test_app.post(f'{auth_router.prefix}/sign-in/', kwargs=json.dumps(test_data) )
+    print(response.json())
+    assert response.status_code == 200
+    assert response.json() == test_data
